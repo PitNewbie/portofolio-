@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio - PitNewbie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- ANIMASI --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes shine {
+            100% { left: 125%; }
+        }
+
+        /* --- BANNER YOUTUBE BACKGROUND --- */
+        .banner-container {
+            position: relative;
+            width: 100%;
+            height: 35vh;
+            background: #1f2833;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw;
+            min-height: 35vh;
+            min-width: 177.77vh;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .video-background iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(11, 12, 16, 0.1), rgba(11, 12, 16, 1));
+        }
+
+        /* --- UTAMA / CONTAINER --- */
+        .profile-container {
+            max-width: 540px;
+            margin: -80px auto 50px auto;
+            padding: 0 20px;
+            position: relative;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .profile-avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #c5a059;
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
+            animation: scaleIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .profile-info {
+            margin-top: 15px;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .profile-info h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .profile-info p {
+            font-size: 0.9rem;
+            color: #c5a059;
+            font-weight: 300;
+            margin-top: 3px;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- TABS NAVIGATION (2 HALAMAN) --- */
+        .tabs-nav {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px;
+            border-radius: 30px;
+            margin: 30px 0 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn.active {
+            background: #c5a059;
+            color: #0b0c10;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        /* --- PAGES SYSTEM --- */
+        .page-content {
+            display: none;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .page-content.active-page {
+            display: block;
+        }
+
+        /* --- TOMBOL SPECIAL ORDER AM --- */
+        .order-premium-card {
+            display: flex;
+            align-items: center;
+            padding: 16px 24px;
+            text-decoration: none;
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.2) 0%, rgba(37, 211, 102, 0.2) 100%);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(197, 160, 89, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .order-premium-card:hover {
+            transform: translateY(-3px);
+            border-color: #25d366;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2);
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.25) 0%, rgba(37, 211, 102, 0.3) 100%);
+        }
+
+        .order-premium-card i {
+            font-size: 1.6rem;
+            color: #25d366;
+            animation: pulse 2s infinite;
+        }
+
+        .order-premium-card .link-text h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .order-premium-card .link-text p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* --- LINKS GROUP (HALAMAN AKUN) --- */
+        .links-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            padding: 16px 24px;
+            text-decoration: none;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+        }
+
+        .link-card:hover::before {
+            animation: shine 0.75s forwards;
+        }
+
+        .link-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(197, 160, 89, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .link-card i {
+            font-size: 1.3rem;
+            width: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover i { transform: scale(1.15); }
+        .link-card:hover .fa-tiktok { color: #ff0050; }
+        .link-card:hover .fa-youtube { color: #ff0000; }
+        .link-card:hover .fa-whatsapp { color: #25d366; }
+        .link-card:hover .fa-envelope-open-text { color: #c5a059; }
+
+        .link-text {
+            flex-grow: 1;
+            text-align: left;
+            margin-left: 12px;
+        }
+
+        .link-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .arrow-icon {
+            font-size: 0.8rem !important;
+            opacity: 0.4;
+            transition: transform 0.3s ease !important;
+        }
+
+        .link-card:hover .arrow-icon {
+            opacity: 1;
+            transform: translateX(4px) !important;
+        }
+
+        /* --- SHOWCASE SECTION (HALAMAN WEB SAYA) --- */
+        .showcase-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #c5a059;
+            margin-bottom: 20px;
+            text-align: left;
+            padding-left: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-left: 3px solid #c5a059;
+            line-height: 1;
+        }
+
+        .web-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .web-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .web-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .web-details h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .web-details p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .status-badge.online { color: #25d366; background: rgba(37, 211, 102, 0.1); }
+        .status-badge.online .status-dot {
+            background-color: #25d366;
+            box-shadow: 0 0 8px #25d366;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-badge.offline { color: #ff3b30; background: rgba(255, 59, 48, 0.1); }
+        .status-badge.offline .status-dot { background-color: #ff3b30; box-shadow: 0 0 8px #ff3b30; }
+
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+
+        /* Tombol Buka Web */
+        .btn-visit {
+            background: #c5a059;
+            color: #0b0c10;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(197, 160, 89, 0.2);
+        }
+
+        .btn-visit:hover {
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-visit.disabled {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.3);
+            box-shadow: none;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 60px;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner-container">
+        <div class="video-background">
+            <!-- Link Video YouTube Diperbarui dengan ID S0CeYGSR1i8 -->
+            <iframe src="https://www.youtube-nocookie.com/embed/S0CeYGSR1i8?autoplay=1&mute=1&loop=1&playlist=S0CeYGSR1i8&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" allow="autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="banner-overlay"></div>
+    </div>
+
+    <div class="profile-container">
+        <!-- Avatar & Profil Utama -->
+        <img src="PitNewbie.jpg" alt="Foto Profil" class="profile-avatar">
+        <div class="profile-info">
+            <h1>PitNewbie</h1>
+            <p>Web Developer & Creative Explorer</p>
+        </div>
+
+        <!-- Menu Navigasi Tab (2 Halaman) -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchPage('akun')">
+                <i class="fas fa-user"></i> Akun
+            </button>
+            <button class="tab-btn" onclick="switchPage('web')">
+                <i class="fas fa-code"></i> Web Saya
+            </button>
+        </div>
+
+        <!-- ================= HALAMAN 1: AKUN ================= -->
+        <div id="page-akun" class="page-content active-page">
+            
+            <!-- Tombol Order Premium WhatsApp -->
+            <a href="https://wa.me/6285727658632?text=Halo%20PitNewbie,%20saya%20mau%20order%20AM%20Prem%205k/tahun%20(Private)" target="_blank" class="order-premium-card">
+                <i class="fab fa-whatsapp"></i>
+                <div class="link-text">
+                    <h4>Order AM Prem 5k/tahun (Private)</h4>
+                    <p>Klik langsung via WhatsApp Resmi</p>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
+            </a>
+
+            <!-- Sosmed Links Group -->
+            <div class="links-group">
+                <a href="https://tiktok.com/@pitkulbet_12" target="_blank" class="link-card">
+                    <i class="fab fa-tiktok"></i>
+                    <span class="link-title">TikTok</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+
+                <a href="https://www.youtube.com/@YT_pitXml12" target="_blank" class="link-card">
+                    <i class="fab fa-youtube"></i>
+                    <span class="link-title">YouTube Channel</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+
+                <a href="https://whatsapp.com/channel/0029Vb6678635fLqu0pxqx2K" target="_blank" class="link-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="link-title">Saluran WhatsApp</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+
+                <a href="https://imaginative-banoffee-8803f5.netlify.app/" target="_blank" class="link-card">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <span class="link-title">Request Something</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN 2: WEB SAYA ================= -->
+        <div id="page-web" class="page-content">
+            <h2 class="showcase-title">Web Buatan Gw</h2>
+            <div class="web-grid">
+                
+                <!-- Web: NewAppStore -->
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>NewAppStore</h3>
+                        <p>Web download/upload apk lokal</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://pitnewbie.github.io/NewAppStore/" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                 <!-- Web: Tabunganku Pro -->
+                 <div class="web-item">
+                    <div class="web-details">
+                        <h3>Tabunganku Pro</h3>
+                        <p>Web target barang</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://pitnewbie.github.io/Tabunganku/" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                <!-- Web: HDKU AI -->
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>HDKU AI</h3>
+                        <p>Web AI DOWNLOADER</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://pitnewbie.github.io/hdku-ai.id/" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                <!-- Web: PhotoShort -->
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>PhotoShort</h3>
+                        <p>Web post foto online</p>
+                        <div class="status-badge offline"><span class="status-dot"></span> Offline</div>
+                    </div>
+                    <a href="#" class="btn-visit disabled">Buka</a>
+                </div>
+
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 PitNewbie. Crafted on Mobile.</p>
+        </footer>
+    </div>
+
+    <!-- --- JAVASCRIPT SYSTEM --- -->
+    <script>
+        // Fungsi perpindahan halaman (Tab System)
+        function switchPage(pageName) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active-page');
+            });
+            // Nonaktifkan semua tombol tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Aktifkan halaman dan tombol yang dipilih
+            if(pageName === 'akun') {
+                document.getElementById('page-akun').classList.add('active-page');
+                event.currentTarget.classList.add('active');
+            } else if(pageName === 'web') {
+                document.getElementById('page-web').classList.add('active-page');
+                event.currentTarget.classList.add('active');
+            }
+        }
+
+        // Efek Interaktif Sentuhan untuk Mobile
+        document.querySelectorAll('.link-card, .btn-visit:not(.disabled), .order-premium-card').forEach(element => {
+            element.addEventListener('touchstart', () => {
+                element.style.transform = 'scale(0.98)';
+            });
+            element.addEventListener('touchend', () => {
+                element.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
