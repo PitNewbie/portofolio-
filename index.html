@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarPit - portofolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="main-layout-121090.css">
+   
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER NAVIGASI -->
+        <header>
+            <div class="logo" onclick="showPage('utama')">StarPit.my.id</div>
+            <button class="menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
+
+            <!-- DROPDOWN MENU GARIS 3 -->
+            <div class="nav-dropdown" id="navDropdown">
+                <button id="btnNavUtama" class="active" onclick="showPage('utama')"><i class="fas fa-home"></i> Utama</button>
+                <button id="btnNavProject" onclick="showPage('project')"><i class="fas fa-code"></i> My Project</button>
+            </div>
+        </header>
+
+        <!-- ================= HALAMAN 1: UTAMA ================= -->
+        <div id="page-utama" class="page active">
+            
+            <!-- CONTANER MODUL DESKTOP GRID -->
+            <div class="desktop-grid">
+                
+                <!-- KOLOM KIRI (PROFIL) -->
+                <div class="desktop-sticky">
+                    <div class="profile-card">
+                        <div class="card-banner-video">
+                            <iframe src="https://www.youtube-nocookie.com/embed/S0CeYGSR1i8?autoplay=1&mute=1&loop=1&playlist=S0CeYGSR1i8&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <div class="banner-overlay"></div>
+                        </div>
+
+                        <div class="profile-content">
+                            <div class="avatar-wrapper">
+                                <img src="PitNewbie.jpg" alt="PitNewbie" class="avatar">
+                            </div>
+                            <div class="profile-title">
+                                <h1 class="name">StarPit</h1>
+                                <div class="badge-coder"><i class="fas fa-check"></i> vibe coder</div>
+                            </div>
+                            <div class="username-status">
+                                <span>owner@starpit.my.id</span>
+                                <span class="dot-status"></span>
+                                <span>building in public</span>
+                            </div>
+                            <p class="bio-text">
+                                Kode gua tulis sendiri — AI gua ajak kerja bareng biar mikirnya lebih gercep. Bukan generate-tempel doang, tetep paham tiap baris yang gua bangun.
+                            </p>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-label">STATUS</div>
+                                    <div class="stat-value">Terus belajar</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">FOKUS</div>
+                                    <div class="stat-value">Front-end</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">METODE</div>
+                                    <div class="stat-value">Human + AI</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KOLOM KANAN (CONTENT METRICS) -->
+                <div>
+                    <!-- MARQUEE INFINITE SCROLL PILLS -->
+                    <div class="marquee-wrapper">
+                        <div class="marquee-track">
+                            <div class="pill-item">VIBE CODING</div>
+                            <div class="pill-item">GEN-Z DEV</div>
+                            <div class="pill-item">HTML & CSS</div>
+                            <div class="pill-item">BUILDING IN PUBLIC</div>
+                            <div class="pill-item">VIBE CODING</div>
+                            <div class="pill-item">GEN-Z DEV</div>
+                            <div class="pill-item">HTML & CSS</div>
+                            <div class="pill-item">BUILDING IN PUBLIC</div>
+                        </div>
+                    </div>
+
+                    <!-- TECH STACK -->
+                    <div class="section-header">
+                        <div class="section-tag">01 TECH STACK</div>
+                        <h2 class="section-title">Bahasa yang gua kuasain</h2>
+                        <p class="section-desc">Level jujur apa adanya — masih terus nambah.</p>
+                    </div>
+
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">HTML</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 100%;"></div></div>
+                            </div>
+                            <span class="tech-level">paling jago</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">JavaScript</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 70%;"></div></div>
+                            </div>
+                            <span class="tech-level">Lumayan</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">CSS</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 50%;"></div></div>
+                            </div>
+                            <span class="tech-level">basic</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">TypeScript</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 35%;"></div></div>
+                            </div>
+                            <span class="tech-level">baru mulai</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">PHP</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 10%;"></div></div>
+                            </div>
+                            <span class="tech-level">blom dicoba</span>
+                       </div>
+                       <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">Python</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 48%;"></div></div>
+                            </div>
+                            <span class="tech-level">aku mw 5</span>
+                       </div>
+                    </div>
+
+                    <!-- WORKFLOW AI -->
+                    <div class="section-header">
+                        <div class="section-tag">02 WORKFLOW</div>
+                        <h2 class="section-title">AI jadi co-pilot, bukan yang nyetir</h2>
+                        <p class="section-desc">Bantoin gercep, tapi kode & keputusan tetep di tangan gua.</p>
+                    </div>
+
+                    <div class="workflow-grid">
+                        <div class="ai-card">
+                            <div>
+                                <div class="ai-icon" style="color: #d97706;"><i class="fas fa-sun"></i></div>
+                                <div class="ai-name">Claude</div>
+                            </div>
+                            <div class="ai-desc">Diajak diskusi logic & rapihin struktur — keputusan tetep gua.</div>
+                        </div>
+                        <div class="ai-card">
+                            <div>
+                                <div class="ai-icon" style="color: #10b981;"><i class="fas fa-asterisk"></i></div>
+                                <div class="ai-name">ChatGPT</div>
+                            </div>
+                            <div class="ai-desc">Buat mancing ide & sparring pas logic-nya mentok.</div>
+                        </div>
+                        <div class="ai-card">
+                            <div>
+                                <div class="ai-icon" style="color: #3b82f6;"><i class="fas fa-sparkles"></i></div>
+                                <div class="ai-name">Gemini</div>
+                            </div>
+                            <div class="ai-desc">Riset cepet & bandingin pendekatan pas lagi buntu.</div>
+                        </div>
+                        <div class="ai-card">
+                            <div>
+                                <div class="ai-icon" style="color: #8b5cf6;"><i class="fas fa-microchip"></i></div>
+                                <div class="ai-name">Google AI Studio</div>
+                            </div>
+                            <div class="ai-desc">Eksperimen API & prototyping model AI secara presisi.</div>
+                        </div>
+                    </div>
+
+                    <!-- STATEMENT -->
+                    <div class="statement-card">
+                        <i class="fas fa-sparkles statement-icon"></i>
+                        <div class="statement-text">
+                            Skill nambah pelan-pelan, bukan sat-set jadi expert semalem.<br><br>
+                            Progress harian > instant result. No cap.
+                        </div>
+                    </div>
+
+                    <!-- CONNECT SECTION -->
+                    <div class="connect-section">
+                        <h3 class="connect-title">Mau connect?</h3>
+                        <p class="connect-desc">Cek saluran gua atau lihat project lain yang udah gua bikin.</p>
+                        <div class="btn-group">
+                            <a href="https://whatsapp.com/channel/0029Vb6678635fLqu0pxqx2K" target="_blank" class="btn-action btn-primary"><i class="fab fa-whatsapp"></i> my saluran</a>
+                            <button onclick="showPage('project')" class="btn-action btn-secondary"><i class="fas fa-link"></i> my project lainnya</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= HALAMAN 2: MY PROJECT ================= -->
+        <div id="page-project" class="page">
+            <div class="section-header">
+                <div class="section-tag">PORTFOLIO</div>
+                <h2 class="section-title">My Projeck website</h2>
+                <p class="section-desc">Daftar aplikasi dan web buatan PitNewbie.</p>
+            </div>
+
+            <div class="web-grid">
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>NewAppStore</h3>
+                        <p>Web download/upload apk lokal</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://Store.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+              
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>AstroRealm</h3>
+                        <p>cek zodiak lengkap dan detail</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://Store.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>neXai Search</h3>
+                        <p>app search website</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://nexai-cloud.starpit.my.id/" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>ToLine App</h3>
+                        <p>jual/beli akun premium</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://www.toline.starpit.my.id/" target="_blank" class="btn-visit">Buka</a>
+                </div>
+      
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>Tabunganku Pro</h3>
+                        <p>Web target barang</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://tabungan.StarPit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>StarIQ</h3>
+                        <p>cek score IQ dengan pertanyaan yang logis</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://iq.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+      
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>HDKU AI</h3>
+                        <p>Web AI DOWNLOADER</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://hdku.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>StarLink</h3>
+                        <p>samarkan moner wa kamu dengan starlink</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://link.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>PhotoShort</h3>
+                        <p>Web post foto online</p>
+                        <div class="status-badge offline"><span class="status-dot"></span> Offline</div>
+                    </div>
+                    <a href="#" class="btn-visit disabled">Buka</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            © starpit · built with vibe coding
+        </footer>
+    </div>
+
+    <!-- WIDGET FLOATING WHATSAPP -->
+    <div class="wa-floating-container">
+        <div class="wa-tooltip" id="waTooltip">AM PREM 5K/TAHUN</div>
+        <a href="https://wa.me/6285727658632?text=Halo%20StarPit,%20saya%20mau%20order" target="_blank" class="wa-btn" id="waBtn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="logic-app-portofol-1220119.js"></script>
+
+</body>
+</html>
