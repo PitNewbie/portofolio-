@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarPit - portofolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #080a0f;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 40px;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px; /* Mobile layout default */
+            padding: 16px;
+            z-index: 1;
+            position: relative;
+            transition: max-width 0.3s ease;
+        }
+
+        /* --- DESKTOP WEB MODE RESPONSIVE (MEDIA QUERY) --- */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 900px; /* Lebar optimal untuk Desktop */
+                padding: 24px;
+            }
+
+            /* Ubah tampilan menjadi 2 Kolom untuk Desktop */
+            .desktop-grid {
+                display: grid;
+                grid-template-columns: 360px 1fr;
+                gap: 20px;
+                align-items: start;
+            }
+
+            .desktop-sticky {
+                position: sticky;
+                top: 20px;
+            }
+
+            .workflow-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .web-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 16px !important;
+            }
+        }
+
+        /* --- HEADER NAVIGASI --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 18px;
+            background: rgba(13, 17, 26, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.5px;
+            cursor: pointer;
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: #0d111a;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            width: 180px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            overflow: hidden;
+            z-index: 9999;
+        }
+
+        .nav-dropdown.active {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .nav-dropdown button {
+            width: 100%;
+            background: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            color: #c3c7db;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-dropdown button:hover, .nav-dropdown button.active {
+            background: rgba(88, 101, 242, 0.2);
+            color: #ffffff;
+        }
+
+        /* --- PAGES SYSTEM --- */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- PROFILE CARD --- */
+        .profile-card {
+            background: rgba(13, 17, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-banner-video {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            background: #1f2833;
+        }
+
+        .card-banner-video iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw;
+            min-height: 160px;
+            min-width: 284px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border: none;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(13, 17, 26, 0.2), rgba(13, 17, 26, 1));
+        }
+
+        .profile-content {
+            padding: 0 20px 20px 20px;
+            position: relative;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            margin-top: -45px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .avatar {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            border: 3px solid #0d111a;
+            object-fit: cover;
+        }
+
+        .profile-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .name {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .badge-coder {
+            background: rgba(88, 101, 242, 0.15);
+            color: #8a99ff;
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .username-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6c788d;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        .dot-status {
+            width: 6px;
+            height: 6px;
+            background: #6c788d;
+            border-radius: 50%;
+        }
+
+        .bio-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #c3c7db;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 16px;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #5d6778;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* --- MARQUEE INFINITE SCROLL PILLS --- */
+        .marquee-wrapper {
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 28px;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 10px;
+            width: max-content;
+            animation: marqueeScroll 12s linear infinite;
+        }
+
+        .pill-item {
+            background: rgba(13, 17, 26, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 18px;
+            border-radius: 12px;
+            white-space: nowrap;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #6c788d;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- SECTION HEADERS --- */
+        .section-header {
+            margin-bottom: 16px;
+        }
+
+        .section-tag {
+            font-size: 0.7rem;
+            color: #5d6778;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .section-desc {
+            font-size: 0.85rem;
+            color: #6c788d;
+        }
+
+        /* --- TECH STACK --- */
+        .tech-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .tech-item {
+            background: rgba(13, 17, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tech-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tech-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .tech-bar {
+            width: 40px;
+            height: 4px;
+            background: #1a202c;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .tech-progress {
+            height: 100%;
+            background: #5865f2;
+            border-radius: 2px;
+        }
+
+        .tech-level {
+            font-size: 0.8rem;
+            color: #6c788d;
+        }
+
+        /* --- WORKFLOW AI --- */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .ai-card {
+            background: rgba(13, 17, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ai-icon {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+        }
+
+        .ai-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .ai-desc {
+            font-size: 0.78rem;
+            color: #6c788d;
+            line-height: 1.4;
+        }
+
+        /* --- STATEMENT --- */
+        .statement-card {
+            background: rgba(13, 17, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .statement-icon {
+            color: #5865f2;
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+
+        .statement-text {
+            font-size: 0.82rem;
+            color: #8a99ff;
+            line-height: 1.5;
+        }
+
+        /* --- CONNECT SECTION --- */
+        .connect-section {
+            text-align: center;
+            background: rgba(13, 17, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 24px 20px;
+        }
+
+        .connect-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .connect-desc {
+            font-size: 0.8rem;
+            color: #6c788d;
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #5865f2;
+            color: #ffffff;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* --- HALAMAN 2: MY PROJECT --- */
+        .web-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .web-item {
+            background: rgba(13, 17, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .web-details h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .web-details p {
+            font-size: 0.78rem;
+            color: #6c788d;
+            margin-top: 2px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.68rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .status-badge.online { color: #25d366; background: rgba(37, 211, 102, 0.1); }
+        .status-badge.online .status-dot { background-color: #25d366; }
+
+        .status-badge.offline { color: #ff3b30; background: rgba(255, 59, 48, 0.1); }
+        .status-badge.offline .status-dot { background-color: #ff3b30; }
+
+        .status-dot { width: 5px; height: 5px; border-radius: 50%; }
+
+        .btn-visit {
+            background: #c5a059;
+            color: #0b0c10;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .btn-visit.disabled {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+        }
+
+        /* --- FLOATING WHATSAPP WIDGET DENGAN POPUP AUTO --- */
+        .wa-floating-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10000;
+        }
+
+        .wa-tooltip {
+            background: rgba(13, 17, 26, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(37, 211, 102, 0.4);
+            color: #ffffff;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateX(15px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .wa-tooltip.show {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .wa-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            width: 10px;
+            height: 10px;
+            background: #0d111a;
+            border-right: 1px solid rgba(37, 211, 102, 0.4);
+            border-top: 1px solid rgba(37, 211, 102, 0.4);
+        }
+
+        .wa-btn {
+            width: 56px;
+            height: 56px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .wa-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .wa-btn::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #25d366;
+            opacity: 0.5;
+            z-index: -1;
+            animation: waPulse 2s infinite;
+        }
+
+        @keyframes waPulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER NAVIGASI -->
+        <header>
+            <div class="logo" onclick="showPage('utama')">StarPit.my.id</div>
+            <button class="menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
+
+            <!-- DROPDOWN MENU GARIS 3 -->
+            <div class="nav-dropdown" id="navDropdown">
+                <button id="btnNavUtama" class="active" onclick="showPage('utama')"><i class="fas fa-home"></i> Utama</button>
+                <button id="btnNavProject" onclick="showPage('project')"><i class="fas fa-code"></i> My Project</button>
+            </div>
+        </header>
+
+        <!-- ================= HALAMAN 1: UTAMA ================= -->
+        <div id="page-utama" class="page active">
+            
+            <!-- CONTANER MODUL DESKTOP GRID -->
+            <div class="desktop-grid">
+                
+                <!-- KOLOM KIRI (PROFIL) -->
+                <div class="desktop-sticky">
+                    <div class="profile-card">
+                        <div class="card-banner-video">
+                            <iframe src="https://www.youtube-nocookie.com/embed/S0CeYGSR1i8?autoplay=1&mute=1&loop=1&playlist=S0CeYGSR1i8&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <div class="banner-overlay"></div>
+                        </div>
+
+                        <div class="profile-content">
+                            <div class="avatar-wrapper">
+                                <img src="PitNewbie (1).jpg" alt="PitNewbie" class="avatar">
+                            </div>
+                            <div class="profile-title">
+                                <h1 class="name">StarPit</h1>
+                                <div class="badge-coder"><i class="fas fa-check"></i> vibe coder</div>
+                            </div>
+                            <div class="username-status">
+                                <span>owner@starpit.my.id</span>
+                                <span class="dot-status"></span>
+                                <span>building in public</span>
+                            </div>
+                            <p class="bio-text">
+                                Kode gua tulis sendiri — AI gua ajak kerja bareng biar mikirnya lebih gercep. Bukan generate-tempel doang, tetep paham tiap baris yang gua bangun.
+                            </p>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-label">STATUS</div>
+                                    <div class="stat-value">Terus belajar</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">FOKUS</div>
+                                    <div class="stat-value">Front-end</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">METODE</div>
+                                    <div class="stat-value">Human + AI</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KOLOM KANAN (CONTENT METRICS) -->
+                <div>
+                    <!-- MARQUEE INFINITE SCROLL PILLS -->
+                    <div class="marquee-wrapper">
+                        <div class="marquee-track">
+                            <div class="pill-item">VIBE CODING</div>
+                            <div class="pill-item">GEN-Z DEV</div>
+                            <div class="pill-item">HTML & CSS</div>
+                            <div class="pill-item">BUILDING IN PUBLIC</div>
+                            <div class="pill-item">VIBE CODING</div>
+                            <div class="pill-item">GEN-Z DEV</div>
+                            <div class="pill-item">HTML & CSS</div>
+                            <div class="pill-item">BUILDING IN PUBLIC</div>
+                        </div>
+                    </div>
+
+                    <!-- TECH STACK -->
+                    <div class="section-header">
+                        <div class="section-tag">01 TECH STACK</div>
+                        <h2 class="section-title">Bahasa yang gua kuasain</h2>
+                        <p class="section-desc">Level jujur apa adanya — masih terus nambah.</p>
+                    </div>
+
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">HTML</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 100%;"></div></div>
+                            </div>
+                            <span class="tech-level">paling jago</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">JavaScript</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 70%;"></div></div>
+                            </div>
+                            <span class="tech-level">Lumayan</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">CSS</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 50%;"></div></div>
+                            </div>
+                            <span class="tech-level">basic</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">TypeScript</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 35%;"></div></div>
+                            </div>
+                            <span class="tech-level">baru mulai</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">PHP</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 10%;"></div></div>
+                            </div>
+                            <span class="tech-level">blom dicoba</span>
+                       </div>
+                       <div class="tech-item">
+                            <div class="tech-left">
+                                <span class="tech-name">Python</span>
+                                <div class="tech-bar"><div class="tech-progress" style="width: 48%;"></div></div>
+                            </div>
+                            <span class="tech-level">aku mw 5</span>
+                       </div>
+                    </div>
+
+                    <!-- WORKFLOW AI -->
+                    <div class="section-header">
+                        <div class="section-tag">02 WORKFLOW</div>
+                        <h2 class="section-title">AI jadi co-pilot, bukan yang nyetir</h2>
+                        <p class="section-desc">Bantoin gercep, tapi kode & keputusan tetep di tangan gua.</p>
+                    </div>
+
+                    <div class="workflow-grid">
+                        <div class="ai-card">
+                            <div>
+                                <div class="ai-icon" style="color: #d97706;"><i class="fas fa-sun"></i></div>
+                                <div class="ai-name">Claude</div>
+                            </div>
+                            <div class="ai-desc">Diajak diskusi logic & rapihin struktur — keputusan tetep gua.</div>
+                        </div>
+                        <div class="ai-card">
+                            <div>
+                                <div class="ai-icon" style="color: #10b981;"><i class="fas fa-asterisk"></i></div>
+                                <div class="ai-name">ChatGPT</div>
+                            </div>
+                            <div class="ai-desc">Buat mancing ide & sparring pas logic-nya mentok.</div>
+                        </div>
+                        <div class="ai-card">
+                            <div>
+                                <div class="ai-icon" style="color: #3b82f6;"><i class="fas fa-sparkles"></i></div>
+                                <div class="ai-name">Gemini</div>
+                            </div>
+                            <div class="ai-desc">Riset cepet & bandingin pendekatan pas lagi buntu.</div>
+                        </div>
+                        <div class="ai-card">
+                            <div>
+                                <div class="ai-icon" style="color: #8b5cf6;"><i class="fas fa-microchip"></i></div>
+                                <div class="ai-name">Google AI Studio</div>
+                            </div>
+                            <div class="ai-desc">Eksperimen API & prototyping model AI secara presisi.</div>
+                        </div>
+                    </div>
+
+                    <!-- STATEMENT -->
+                    <div class="statement-card">
+                        <i class="fas fa-sparkles statement-icon"></i>
+                        <div class="statement-text">
+                            Skill nambah pelan-pelan, bukan sat-set jadi expert semalem.<br><br>
+                            Progress harian > instant result. No cap.
+                        </div>
+                    </div>
+
+                    <!-- CONNECT SECTION -->
+                    <div class="connect-section">
+                        <h3 class="connect-title">Mau connect?</h3>
+                        <p class="connect-desc">Cek saluran gua atau lihat project lain yang udah gua bikin.</p>
+                        <div class="btn-group">
+                            <a href="https://whatsapp.com/channel/0029Vb6678635fLqu0pxqx2K" target="_blank" class="btn-action btn-primary"><i class="fab fa-whatsapp"></i> my saluran</a>
+                            <button onclick="showPage('project')" class="btn-action btn-secondary"><i class="fas fa-link"></i> my project lainnya</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= HALAMAN 2: MY PROJECT ================= -->
+        <div id="page-project" class="page">
+            <div class="section-header">
+                <div class="section-tag">PORTFOLIO</div>
+                <h2 class="section-title">My Projeck website</h2>
+                <p class="section-desc">Daftar aplikasi dan web buatan PitNewbie.</p>
+            </div>
+
+            <div class="web-grid">
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>NewAppStore</h3>
+                        <p>Web download/upload apk lokal</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://Store.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+              
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>AstroRealm</h3>
+                        <p>cek zodiak lengkap dan detail</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://Store.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>neXai Search</h3>
+                        <p>app search website</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://nexai-cloud.starpit.my.id/" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>ToLine App</h3>
+                        <p>jual/beli akun premium</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://www.toline.starpit.my.id/" target="_blank" class="btn-visit">Buka</a>
+                </div>
+      
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>Tabunganku Pro</h3>
+                        <p>Web target barang</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://tabungan.StarPit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>StarIQ</h3>
+                        <p>cek score IQ dengan pertanyaan yang logis</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://iq.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+      
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>HDKU AI</h3>
+                        <p>Web AI DOWNLOADER</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://hdku.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                
+                  <div class="web-item">
+                    <div class="web-details">
+                        <h3>StarLink</h3>
+                        <p>samarkan moner wa kamu dengan starlink</p>
+                        <div class="status-badge online"><span class="status-dot"></span> Aktif</div>
+                    </div>
+                    <a href="https://link.starpit.my.id" target="_blank" class="btn-visit">Buka</a>
+                </div>
+
+                <div class="web-item">
+                    <div class="web-details">
+                        <h3>PhotoShort</h3>
+                        <p>Web post foto online</p>
+                        <div class="status-badge offline"><span class="status-dot"></span> Offline</div>
+                    </div>
+                    <a href="#" class="btn-visit disabled">Buka</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            © starpit · built with vibe coding
+        </footer>
+    </div>
+
+    <!-- WIDGET FLOATING WHATSAPP -->
+    <div class="wa-floating-container">
+        <div class="wa-tooltip" id="waTooltip">AM PREM 5K/TAHUN</div>
+        <a href="https://wa.me/6285727658632?text=Halo%20StarPit,%20saya%20mau%20order" target="_blank" class="wa-btn" id="waBtn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- SCRIPT SYSTEM -->
+    <script>
+        // --- NAVIGASI GARIS 3 & TABS ---
+        const menuBtn = document.getElementById('menuToggle');
+        const navDropdown = document.getElementById('navDropdown');
+
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            navDropdown.classList.remove('active');
+        });
+
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            document.getElementById('btnNavUtama').classList.remove('active');
+            document.getElementById('btnNavProject').classList.remove('active');
+
+            if (pageName === 'utama') {
+                document.getElementById('page-utama').classList.add('active');
+                document.getElementById('btnNavUtama').classList.add('active');
+            } else if (pageName === 'project') {
+                document.getElementById('page-project').classList.add('active');
+                document.getElementById('btnNavProject').classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- AUTOMATIC WHATSAPP POPUP & PROMO MESSAGE SYSTEM ---
+        const promoMessages = [
+            "AM PREM 5K/TAHUN",
+            "WINK VIP+ 9k/Minggu"
+        ];
+
+        const waTooltip = document.getElementById('waTooltip');
+        const waBtn = document.getElementById('waBtn');
+        let currentMessageIndex = 0;
+
+        function triggerWaPromo() {
+            // Pilih pesan acak dari array
+            const randomIndex = Math.floor(Math.random() * promoMessages.length);
+            const selectedMsg = promoMessages[randomIndex];
+            
+            waTooltip.textContent = selectedMsg;
+            
+            // Atur URL WhatsApp agar otomatis membawa pesan promo saat diklik
+            const encodedText = encodeURIComponent(`Halo StarPit, saya mau order ${selectedMsg}`);
+            waBtn.href = `https://wa.me/6285727658632?text=${encodedText}`;
+
+            // Tampilkan pesan dengan animasi smooth
+            waTooltip.classList.add('show');
+
+            // Sembunyikan pesan setelah 15 detik
+            setTimeout(() => {
+                waTooltip.classList.remove('show');
+            }, 15000);
+        }
+
+        // Jalankan saat pertama kali dimuat
+        setTimeout(triggerWaPromo, 2000);
+
+        // Jalankan berulang setiap 30 detik
+        setInterval(triggerWaPromo, 30000);
+    </script>
+</body>
+</html>
